@@ -1,0 +1,290 @@
+﻿<Controls:MetroWindow x:Class="Whiteboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:NDI="clr-namespace:NewTek.NDI.WPF;assembly=NDIlibDotNet2"
+        xmlns:whiteboard="clr-namespace:Whiteboard"
+  	    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="Whiteboard"
+        WindowStartupLocation="CenterScreen"
+	    FontFamily="Montserrat"
+		BorderBrush="#EA4333"
+        BorderThickness="1"
+        Width="800"
+        Height="523.921"                      
+ 	    KeyDown="MainWindow_KeyDown">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid Margin="0,0,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="1"
+				Margin="5"
+				BorderBrush="Black"
+				BorderThickness="1">
+            <NDI:NdiSendContainer NdiWidth="1280" NdiHeight="720"
+                          NdiName="Whiteboard"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch">
+                <whiteboard:WhiteboardCanvas x:Name="theWhiteboard"
+                     Width="1280" Height="720"
+                    Background="White"
+                    ClipToBounds="True"
+					Cursor="Pen" />
+            </NDI:NdiSendContainer>
+        </Border>
+
+        <StackPanel Name="DrawSettings" Grid.Row="2"
+					Orientation="Horizontal"
+					HorizontalAlignment="Center"
+					Margin="5">
+
+            <Border Name="Border_Btn_Delete"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Delete"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Delete_Click">
+                    <materialDesign:PackIcon Kind="Delete" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_White"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_White"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_White_Click">
+                    <materialDesign:PackIcon Kind="Square" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Chroma"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Chroma"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Chroma_Click" Foreground="#FF23FF00">
+                    <materialDesign:PackIcon Kind="Square" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Transparent"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Transparent"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Transparent_Click">
+                    <materialDesign:PackIcon Kind="Square" Foreground="Gray" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_BlackBrush"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_BlackBrush"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Pen_Click" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Pencil" />
+                </Button>
+            </Border>
+            <Border Name="Border_Btn_RedBrush"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_RedBrush"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Pen_Click" Foreground="Red">
+                    <materialDesign:PackIcon Kind="Pencil" />
+                </Button>
+            </Border>
+            <Border Name="Border_Btn_YellowBrush"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_YellowBrush"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Pen_Click" Foreground="Yellow">
+                    <materialDesign:PackIcon Kind="Pencil" />
+                </Button>
+            </Border>
+            <Border Name="Border_Btn_BlueBrush"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_BlueBrush"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Pen_Click" Foreground="Blue">
+                    <materialDesign:PackIcon Kind="Pencil" />
+                </Button>
+            </Border>
+            <Border Name="Border_Btn_GreenBrush"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_GreenBrush"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Pen_Click" Foreground="#FF23FF00">
+                    <materialDesign:PackIcon Kind="Pencil" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Size1"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Size1"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Size1_Click" Foreground="Black" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.2" ScaleY="0.2"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <materialDesign:PackIcon Kind="Circle" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Size2"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Size2"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Size2_Click" Foreground="Black" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.4" ScaleY="0.4"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <materialDesign:PackIcon Kind="Circle" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Size3"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Size3"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Size3_Click" Foreground="Black" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <materialDesign:PackIcon Kind="Circle" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Size4"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Size4"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Size4_Click" Foreground="Black" RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <materialDesign:PackIcon Kind="Circle" />
+                </Button>
+            </Border>
+
+            <Border Name="Border_Btn_Size5"
+					BorderThickness="0 0 0 3"
+					BorderBrush="Transparent">
+                <Button Name="Btn_Size5"
+					Width="30"
+					Height="32"
+					Style="{StaticResource MaterialDesignToolForegroundButton}"
+					materialDesign:RippleAssist.IsCentered="True"
+					VerticalAlignment="Bottom"
+					ClipToBounds="True"
+					Click="Btn_Size5_Click" Foreground="Black">
+                    <materialDesign:PackIcon Kind="Circle" />
+                </Button>
+            </Border>
+
+        </StackPanel>
+
+    </Grid>
+</Controls:MetroWindow>
