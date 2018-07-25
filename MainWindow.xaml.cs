@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Windows.Media;
 using Brushes = System.Windows.Media.Brushes;
 
 namespace Whiteboard
@@ -65,27 +65,27 @@ namespace Whiteboard
         }
         private void Btn_Size1_Click(object sender, RoutedEventArgs e)
         {
-            theWhiteboard.BrushThickness = 1.0;
+            theWhiteboard.SetPenThickness(1.0);
         }
 
         private void Btn_Size2_Click(object sender, RoutedEventArgs e)
         {
-            theWhiteboard.BrushThickness = 2.0;
+            theWhiteboard.SetPenThickness(2.0);
         }
 
         private void Btn_Size3_Click(object sender, RoutedEventArgs e)
         {
-            theWhiteboard.BrushThickness = 3.0;
+            theWhiteboard.SetPenThickness(3.0);
         }
 
         private void Btn_Size4_Click(object sender, RoutedEventArgs e)
         {
-            theWhiteboard.BrushThickness = 4.0;
+            theWhiteboard.SetPenThickness(4.0);
         }
 
         private void Btn_Size5_Click(object sender, RoutedEventArgs e)
         {
-            theWhiteboard.BrushThickness = 5.0;
+            theWhiteboard.SetPenThickness(5.0);
         }
     }
 }

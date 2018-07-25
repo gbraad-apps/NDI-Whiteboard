@@ -8,10 +8,10 @@
         Title="Whiteboard"
         WindowStartupLocation="CenterScreen"
 	    FontFamily="Montserrat"
-		BorderBrush="#EA4333"
+		BorderBrush="DarkSlateGray"
         BorderThickness="1"
         Width="800"
-        Height="523.921"                      
+        Height="523.921"            
  	    KeyDown="MainWindow_KeyDown">
     <Window.Resources>
     </Window.Resources>

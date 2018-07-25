@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Windows.Controls;
+using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using Brushes = System.Windows.Media.Brushes;
 using Canvas = System.Windows.Controls.Canvas;
@@ -9,15 +12,9 @@ namespace Whiteboard
     class WhiteboardCanvas : Canvas
     {
 
-        private double InitX = -1;
-        private double InitY = -1;
-
-        private bool paintOn;
-        private double brushThickness;
-        public System.Windows.Media.Brush BrushColor = Brushes.Black;
-
-        public double BrushThickness { get => brushThickness; set => brushThickness = value; }
-        public bool PaintOn { get => paintOn; set => paintOn = value; }
+        private double brushThickness = 1.0;
+        private Color brushColor = Colors.Black;
+        private InkCanvas inkCanvas;
 
         public WhiteboardCanvas()
         {
@@ -26,104 +23,62 @@ namespace Whiteboard
 
         private void InitializeComponent()
         {
-            this.MouseUp += WhiteboardCanvas_MouseUp;
-            this.MouseDown += WhiteboardCanvas_MouseDown;
-            this.MouseEnter += WhiteboardCanvas_MouseEnter;
-            this.MouseLeave += WhiteboardCanvas_MouseLeave;
-            this.MouseMove += WhiteboardCanvas_MouseMove;
+            inkCanvas = new InkCanvas();
+            inkCanvas.Background = Brushes.Transparent;
+            SizeChanged += WhiteboardCanvas_SizeChanged;
 
-            brushThickness = 1.0;
+            inkCanvas.UseCustomCursor = true;
+            inkCanvas.Cursor = this.Cursor;
+
+            this.Children.Add(inkCanvas);
         }
 
-        public void Paint(object sender, MouseEventArgs e)
+        private void WhiteboardCanvas_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
-            if (PaintOn)
-            {
-                double X = e.GetPosition(this).X;
-                double Y = e.GetPosition(this).Y;
-
-                Line line = new Line()
-                {
-                    Stroke = BrushColor,
-                    StrokeThickness = BrushThickness,
-                    X1 = InitX,
-                    Y1 = InitY,
-                    X2 = X,
-                    Y2 = Y
-                };
-
-                if (InitX == -1 || InitY == -1)
-                {
-                    line.X1 = X;
-                    line.Y1 = Y;
-                }
-
-                this.Children.Add(line);
-
-                InitX = X;
-                InitY = Y;
-            }
+            // make sure the ink canvas also changes
+            inkCanvas.Width = this.Width;
+            inkCanvas.Height = this.Height;
         }
 
-        public void BeginPaint(object sender, MouseButtonEventArgs e)
+        private void setPenAttributes(Color color, double size)
         {
-            PaintOn = true;
+            DrawingAttributes inkDA = new DrawingAttributes();
+            inkDA.Width = size;
+            inkDA.Height = size;
+            inkDA.Color = color;
+            inkCanvas.DefaultDrawingAttributes = inkDA;
         }
 
-        public void StopPaint(object sender, MouseButtonEventArgs e)
+        public void SetPenColor(Color color)
         {
-            PaintOn = false;
-
-            InitX = -1;
-            InitY = -1;
+            brushColor = color;
+            setPenAttributes(brushColor, brushThickness);
         }
 
-
-        private void WhiteboardCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        public void SetPenColor(Brush color)
         {
-            BeginPaint(sender, e);
+            var scb = (SolidColorBrush)color;
+            SetPenColor(scb.Color);
         }
 
-        private void WhiteboardCanvas_MouseMove(object sender, MouseEventArgs e)
+        public void SetPenThickness(double size)
         {
-            Paint(sender, e);
+            brushThickness = size;
+            setPenAttributes(brushColor, size);
         }
 
-        private void WhiteboardCanvas_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            StopPaint(sender, e);
-        }
-
-        private void WhiteboardCanvas_MouseLeave(object sender, MouseEventArgs e)
-        {
-            StopPaint(sender, null);
-        }
-
-        private void WhiteboardCanvas_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                BeginPaint(sender, null);
-            }
-        }
-
-
-        public void SetPenColor(System.Windows.Media.Brush color)
-        {
-            BrushColor = color;
-        }
 
         public void Undo()
         {
-            if (this.Children.Count > 0)
+            if (inkCanvas.Strokes.Count > 0)
             {
-                this.Children.RemoveAt(this.Children.Count - 1);
+                inkCanvas.Strokes.RemoveAt(inkCanvas.Strokes.Count - 1);
             }
         }
 
         public void Clear()
         {
-            this.Children.Clear();
+            inkCanvas.Strokes.Clear();
         }
 
     }
