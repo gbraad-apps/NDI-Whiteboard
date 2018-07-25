@@ -29,10 +29,12 @@
 				Margin="5"
 				BorderBrush="Black"
 				BorderThickness="1">
-            <NDI:NdiSendContainer NdiWidth="1280" NdiHeight="720"
-                          NdiName="Whiteboard"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch">
+            <NDI:NdiSendContainer Name="NdiContainer"
+                                  NdiWidth="1280" NdiHeight="720"
+                                  NdiName="Whiteboard"
+                                  NdiFrameRateNumerator="30000"
+                                  HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Stretch">
                 <whiteboard:WhiteboardCanvas x:Name="theWhiteboard"
                      Width="1280" Height="720"
                     Background="White"
